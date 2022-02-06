@@ -1,15 +1,103 @@
+const fs = require('fs');
 const { awscdk } = require('projen');
+
+const exampleFile = fs
+  .readFileSync('src/integ.default.ts', 'utf8')
+  .split('\n');
+const example = exampleFile.slice(8, exampleFile.length - 7);
+
+// const propertiesFile = fs.readFileSync('API.md', 'utf8');
+
+const cdkVersion = '1.142.0';
+
 const project = new awscdk.AwsCdkConstructLibrary({
-  author: 'mmuller88',
+  author: 'Martin Mueller',
   authorAddress: 'damadden88@googlemail.com',
-  cdkVersion: '2.1.0',
+  description: 'Construct to create a private asset S3 bucket. A cognito token can be used to allow access to he S3 asset.',
+  cdkVersion,
   defaultReleaseBranch: 'main',
   name: 'cdk-private-asset-bucket',
   repositoryUrl: 'https://github.com/mmuller88/cdk-private-asset-bucket',
+  cdkDependencies: [
+    '@aws-cdk/aws-certificatemanager',
+    '@aws-cdk/aws-cloudfront',
+    '@aws-cdk/aws-cloudfront-origins',
+    '@aws-cdk/aws-iam',
+    '@aws-cdk/aws-lambda',
+    '@aws-cdk/aws-lambda-nodejs',
+    '@aws-cdk/aws-route53',
+    '@aws-cdk/aws-route53-targets',
+    '@aws-cdk/aws-s3',
+  ],
+  peerDeps: [
+    'aws-jwt-verify',
+    'aws-lambda',
+    '@types/aws-lambda',
+  ],
+  devDeps: [
+    'aws-jwt-verify',
+    'aws-lambda',
+    '@types/aws-lambda',
+    `aws-cdk@${cdkVersion}`,
+  ],
+  catalog: {
+    twitter: 'MartinMueller_',
+  },
+  keywords: [
+    'awscdk',
+    'prowler',
+    'audit',
+    'security',
+    'hardening',
+    'aws',
+    'cdk',
+  ],
+  publishToPypi: {
+    distName: 'cdk-prowler',
+    module: 'cdk_prowler',
+  },
+  // publishToNuget: {
+  //   dotNetNamespace: 'com.github.mmuller88',
+  //   packageId: 'com.github.mmuller88.cdkProwler',
+  // },
+  readme: {
+    contents: `[![NPM version](https://badge.fury.io/js/cdk-private-asset-bucket.svg)](https://badge.fury.io/js/cdk-private-asset-bucket)
+[![PyPI version](https://badge.fury.io/py/cdk-private-asset-bucket.svg)](https://badge.fury.io/py/cdk-private-asset-bucket)
+[![.NET version](https://img.shields.io/nuget/v/com.github.mmuller88.cdkPrivateAssetBucket.svg?style=flat-square)](https://www.nuget.org/packages/com.github.mmuller88.cdkPrivateAssetBucket/)
+![Release](https://github.com/mmuller88/cdk-private-asset-bucket/workflows/Release/badge.svg)
 
-  // deps: [],                /* Runtime dependencies of this module. */
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  // devDeps: [],             /* Build dependencies for this module. */
-  // packageName: undefined,  /* The "name" in package.json. */
+# cdk-private-asset-bucket
+
+A construct to create a private asset S3 bucket. Cognito will be used for token validation with Lambda@Edge.
+
+# Example
+\`\`\`ts
+import { ProwlerAudit } from 'cdk-prowler';
+...
+${example.join('\n')}
+\`\`\`
+    
+## Planned Features
+
+- Support S3 bucket import ootb.
+- Support custom authorizer
+
+## Thanks To
+
+- Crespo Wang for his pioneer work regarding private S3 assets https://javascript.plainenglish.io/use-lambda-edge-jwt-to-secure-s3-bucket-dcca6eec4d7e
+- As always to the amazing CDK / Projen Community. Join us on [Slack](https://cdk-dev.slack.com)!
+- [Projen](https://github.com/projen/projen) project and the community around it
+
+    `,
+  },
 });
+
+project.setScript('deploy', './node_modules/.bin/cdk deploy');
+project.setScript('destroy', './node_modules/.bin/cdk destroy');
+project.setScript('synth', './node_modules/.bin/cdk synth');
+
+const common_exclude = ['cdk.out'];
+project.npmignore.exclude(...common_exclude);
+project.gitignore.exclude(...common_exclude);
+
 project.synth();
