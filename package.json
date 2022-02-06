@@ -28,7 +28,6 @@
     "test:watch": "npx projen test:watch",
     "unbump": "npx projen unbump",
     "upgrade": "npx projen upgrade",
-    "upgrade-projen": "npx projen upgrade-projen",
     "watch": "npx projen watch",
     "projen": "npx projen",
     "deploy": "./node_modules/.bin/cdk deploy",
@@ -41,14 +40,23 @@
     "organization": false
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.142.0",
-    "@aws-cdk/assertions": "^1.142.0",
+    "@aws-cdk/assert": "^1.143.0",
+    "@aws-cdk/assertions": "^1.143.0",
+    "@aws-cdk/aws-certificatemanager": "^1.143.0",
+    "@aws-cdk/aws-cloudfront": "^1.143.0",
+    "@aws-cdk/aws-cloudfront-origins": "^1.143.0",
+    "@aws-cdk/aws-iam": "^1.143.0",
+    "@aws-cdk/aws-lambda": "^1.143.0",
+    "@aws-cdk/aws-lambda-nodejs": "^1.143.0",
+    "@aws-cdk/aws-route53": "^1.143.0",
+    "@aws-cdk/aws-route53-targets": "^1.143.0",
+    "@aws-cdk/aws-s3": "^1.143.0",
     "@types/aws-lambda": "^8.10.92",
     "@types/jest": "^27.4.0",
-    "@types/node": "^12",
+    "@types/node": "^14",
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
-    "aws-cdk": "1.142.0",
+    "aws-cdk": "1.143.0",
     "aws-jwt-verify": "*",
     "aws-lambda": "^1.0.7",
     "eslint": "^8",
@@ -68,42 +76,49 @@
     "typescript": "^4.5.5"
   },
   "peerDependencies": {
-    "@aws-cdk/aws-certificatemanager": "^1.142.0",
-    "@aws-cdk/aws-cloudfront": "^1.142.0",
-    "@aws-cdk/aws-cloudfront-origins": "^1.142.0",
-    "@aws-cdk/aws-iam": "^1.142.0",
-    "@aws-cdk/aws-lambda": "^1.142.0",
-    "@aws-cdk/aws-lambda-nodejs": "^1.142.0",
-    "@aws-cdk/aws-route53": "^1.142.0",
-    "@aws-cdk/aws-route53-targets": "^1.142.0",
-    "@aws-cdk/aws-s3": "^1.142.0",
-    "@aws-cdk/core": "^1.142.0",
-    "@types/aws-lambda": "^8.10.92",
-    "aws-jwt-verify": "*",
-    "aws-lambda": "^1.0.7",
+    "@aws-cdk/aws-certificatemanager": "^1.143.0",
+    "@aws-cdk/aws-cloudfront": "^1.143.0",
+    "@aws-cdk/aws-cloudfront-origins": "^1.143.0",
+    "@aws-cdk/aws-iam": "^1.143.0",
+    "@aws-cdk/aws-lambda": "^1.143.0",
+    "@aws-cdk/aws-lambda-nodejs": "^1.143.0",
+    "@aws-cdk/aws-route53": "^1.143.0",
+    "@aws-cdk/aws-route53-targets": "^1.143.0",
+    "@aws-cdk/aws-s3": "^1.143.0",
+    "@aws-cdk/core": "^1.143.0",
     "constructs": "^3.2.27"
   },
   "dependencies": {
-    "@aws-cdk/aws-certificatemanager": "^1.142.0",
-    "@aws-cdk/aws-cloudfront": "^1.142.0",
-    "@aws-cdk/aws-cloudfront-origins": "^1.142.0",
-    "@aws-cdk/aws-iam": "^1.142.0",
-    "@aws-cdk/aws-lambda": "^1.142.0",
-    "@aws-cdk/aws-lambda-nodejs": "^1.142.0",
-    "@aws-cdk/aws-route53": "^1.142.0",
-    "@aws-cdk/aws-route53-targets": "^1.142.0",
-    "@aws-cdk/aws-s3": "^1.142.0",
-    "@aws-cdk/core": "^1.142.0"
+    "@aws-cdk/aws-certificatemanager": "^1.143.0",
+    "@aws-cdk/aws-cloudfront": "^1.143.0",
+    "@aws-cdk/aws-cloudfront-origins": "^1.143.0",
+    "@aws-cdk/aws-iam": "^1.143.0",
+    "@aws-cdk/aws-lambda": "^1.143.0",
+    "@aws-cdk/aws-lambda-nodejs": "^1.143.0",
+    "@aws-cdk/aws-route53": "^1.143.0",
+    "@aws-cdk/aws-route53-targets": "^1.143.0",
+    "@aws-cdk/aws-s3": "^1.143.0",
+    "@aws-cdk/core": "^1.143.0",
+    "@types/aws-lambda": "^8.10.92",
+    "aws-jwt-verify": "*",
+    "aws-lambda": "^1.0.7"
   },
-  "keywords": [
-    "audit",
-    "aws",
-    "awscdk",
-    "cdk",
-    "hardening",
-    "prowler",
-    "security"
+  "bundledDependencies": [
+    "@types/aws-lambda",
+    "aws-jwt-verify",
+    "aws-lambda"
   ],
+  "keywords": [
+    "asset",
+    "aws",
+    "cdk",
+    "cognito",
+    "private",
+    "s3"
+  ],
+  "engines": {
+    "node": ">= 14.17.0"
+  },
   "main": "lib/index.js",
   "license": "Apache-2.0",
   "version": "0.0.0",
@@ -153,8 +168,8 @@
     "outdir": "dist",
     "targets": {
       "python": {
-        "distName": "cdk-prowler",
-        "module": "cdk_prowler"
+        "distName": "cdk-private-asset-bucket",
+        "module": "cdk_private_asset_bucket"
       }
     },
     "tsc": {

@@ -28,7 +28,7 @@ export class PrivateAssetBucket extends core.Construct {
 
   assetBucketName: string;
   assetBucketCloudfrontUrl: string;
-  assetBucketRecordDomainName: string;
+  assetBucketRecordDomainName: string | undefined;
 
   constructor(scope: core.Construct, id: string, props: PrivateAssetBucketProps) {
     super(scope, id);

@@ -1,6 +1,42 @@
 {
   "dependencies": [
     {
+      "name": "@aws-cdk/aws-certificatemanager",
+      "type": "build"
+    },
+    {
+      "name": "@aws-cdk/aws-cloudfront",
+      "type": "build"
+    },
+    {
+      "name": "@aws-cdk/aws-cloudfront-origins",
+      "type": "build"
+    },
+    {
+      "name": "@aws-cdk/aws-iam",
+      "type": "build"
+    },
+    {
+      "name": "@aws-cdk/aws-lambda",
+      "type": "build"
+    },
+    {
+      "name": "@aws-cdk/aws-lambda-nodejs",
+      "type": "build"
+    },
+    {
+      "name": "@aws-cdk/aws-route53",
+      "type": "build"
+    },
+    {
+      "name": "@aws-cdk/aws-route53-targets",
+      "type": "build"
+    },
+    {
+      "name": "@aws-cdk/aws-s3",
+      "type": "build"
+    },
+    {
       "name": "@types/aws-lambda",
       "type": "build"
     },
@@ -10,7 +46,7 @@
     },
     {
       "name": "@types/node",
-      "version": "^12",
+      "version": "^14",
       "type": "build"
     },
     {
@@ -25,7 +61,7 @@
     },
     {
       "name": "aws-cdk",
-      "version": "1.142.0",
+      "version": "1.143.0",
       "type": "build"
     },
     {
@@ -101,65 +137,65 @@
       "type": "build"
     },
     {
+      "name": "@types/aws-lambda",
+      "type": "bundled"
+    },
+    {
+      "name": "aws-jwt-verify",
+      "type": "bundled"
+    },
+    {
+      "name": "aws-lambda",
+      "type": "bundled"
+    },
+    {
       "name": "@aws-cdk/aws-certificatemanager",
-      "version": "^1.142.0",
+      "version": "^1.143.0",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/aws-cloudfront-origins",
-      "version": "^1.142.0",
+      "version": "^1.143.0",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/aws-cloudfront",
-      "version": "^1.142.0",
+      "version": "^1.143.0",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/aws-iam",
-      "version": "^1.142.0",
+      "version": "^1.143.0",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/aws-lambda-nodejs",
-      "version": "^1.142.0",
+      "version": "^1.143.0",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/aws-lambda",
-      "version": "^1.142.0",
+      "version": "^1.143.0",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/aws-route53-targets",
-      "version": "^1.142.0",
+      "version": "^1.143.0",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/aws-route53",
-      "version": "^1.142.0",
+      "version": "^1.143.0",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/aws-s3",
-      "version": "^1.142.0",
+      "version": "^1.143.0",
       "type": "peer"
     },
     {
       "name": "@aws-cdk/core",
-      "version": "^1.142.0",
-      "type": "peer"
-    },
-    {
-      "name": "@types/aws-lambda",
-      "type": "peer"
-    },
-    {
-      "name": "aws-jwt-verify",
-      "type": "peer"
-    },
-    {
-      "name": "aws-lambda",
+      "version": "^1.143.0",
       "type": "peer"
     },
     {
@@ -169,62 +205,62 @@
     },
     {
       "name": "@aws-cdk/aws-certificatemanager",
-      "version": "^1.142.0",
+      "version": "^1.143.0",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/aws-cloudfront-origins",
-      "version": "^1.142.0",
+      "version": "^1.143.0",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/aws-cloudfront",
-      "version": "^1.142.0",
+      "version": "^1.143.0",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/aws-iam",
-      "version": "^1.142.0",
+      "version": "^1.143.0",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/aws-lambda-nodejs",
-      "version": "^1.142.0",
+      "version": "^1.143.0",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/aws-lambda",
-      "version": "^1.142.0",
+      "version": "^1.143.0",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/aws-route53-targets",
-      "version": "^1.142.0",
+      "version": "^1.143.0",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/aws-route53",
-      "version": "^1.142.0",
+      "version": "^1.143.0",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/aws-s3",
-      "version": "^1.142.0",
+      "version": "^1.143.0",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/core",
-      "version": "^1.142.0",
+      "version": "^1.143.0",
       "type": "runtime"
     },
     {
       "name": "@aws-cdk/assert",
-      "version": "^1.142.0",
+      "version": "^1.143.0",
       "type": "test"
     },
     {
       "name": "@aws-cdk/assertions",
-      "version": "^1.142.0",
+      "version": "^1.143.0",
       "type": "test"
     }
   ],
