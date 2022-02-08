@@ -13,6 +13,10 @@
       "type": "build"
     },
     {
+      "name": "@aws-cdk/aws-cognito",
+      "type": "build"
+    },
+    {
       "name": "@aws-cdk/aws-iam",
       "type": "build"
     },
@@ -156,6 +160,11 @@
       "type": "peer"
     },
     {
+      "name": "@aws-cdk/aws-cognito",
+      "version": "^1.143.0",
+      "type": "peer"
+    },
+    {
       "name": "@aws-cdk/aws-iam",
       "version": "^1.143.0",
       "type": "peer"
@@ -207,6 +216,11 @@
     },
     {
       "name": "@aws-cdk/aws-cloudfront",
+      "version": "^1.143.0",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-cdk/aws-cognito",
       "version": "^1.143.0",
       "type": "runtime"
     },

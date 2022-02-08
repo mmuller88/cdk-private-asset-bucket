@@ -10,6 +10,10 @@ import { NodejsEdgeFunction } from './nodejs-edge-function';
 
 export interface PrivateAssetBucketProps {
   readonly assetBucketName?: string;
+  /**
+     * if you want to use an imported bucket instead
+     */
+  readonly assetBucketNameImport?: string;
   readonly customDomain?: CustomDomain;
   readonly userPoolId: string;
   readonly userPoolClientId: string;
@@ -18,9 +22,9 @@ export interface PrivateAssetBucketProps {
 export interface CustomDomain {
   readonly zone: route53.IHostedZone;
   /**
-   * domainName needs to be part of the hosted zone
-   * e.g.: image.example.com
-   */
+     * domainName needs to be part of the hosted zone
+     * e.g.: image.example.com
+     */
   readonly domainName: string;
 }
 
@@ -33,9 +37,14 @@ export class PrivateAssetBucket extends core.Construct {
   constructor(scope: core.Construct, id: string, props: PrivateAssetBucketProps) {
     super(scope, id);
 
-    const assetBucket = new s3.Bucket(this, 'Resource', {
-      bucketName: props.assetBucketName,
-    });
+    let assetBucket: s3.IBucket;
+    if (props.assetBucketNameImport) {
+      assetBucket = s3.Bucket.fromBucketName(this, 'Resource', props.assetBucketNameImport);
+    } else {
+      assetBucket = new s3.Bucket(this, 'Resource', {
+        bucketName: props.assetBucketName,
+      });
+    }
 
     this.assetBucketName = assetBucket.bucketName;
 

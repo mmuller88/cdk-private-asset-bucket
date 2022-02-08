@@ -14,6 +14,7 @@ const cdkDependencies = [
   '@aws-cdk/aws-certificatemanager',
   '@aws-cdk/aws-cloudfront',
   '@aws-cdk/aws-cloudfront-origins',
+  '@aws-cdk/aws-cognito',
   '@aws-cdk/aws-iam',
   '@aws-cdk/aws-lambda',
   '@aws-cdk/aws-lambda-nodejs',

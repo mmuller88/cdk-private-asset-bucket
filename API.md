@@ -141,6 +141,7 @@ const privateAssetBucketProps: PrivateAssetBucketProps = { ... }
 | <code><a href="#cdk-private-asset-bucket.PrivateAssetBucketProps.property.userPoolClientId">userPoolClientId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cdk-private-asset-bucket.PrivateAssetBucketProps.property.userPoolId">userPoolId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cdk-private-asset-bucket.PrivateAssetBucketProps.property.assetBucketName">assetBucketName</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#cdk-private-asset-bucket.PrivateAssetBucketProps.property.assetBucketNameImport">assetBucketNameImport</a></code> | <code>string</code> | if you want to use an imported bucket instead. |
 | <code><a href="#cdk-private-asset-bucket.PrivateAssetBucketProps.property.customDomain">customDomain</a></code> | <code><a href="#cdk-private-asset-bucket.CustomDomain">CustomDomain</a></code> | *No description.* |
 
 ---
@@ -172,6 +173,18 @@ public readonly assetBucketName: string;
 ```
 
 - *Type:* string
+
+---
+
+##### `assetBucketNameImport`<sup>Optional</sup> <a name="assetBucketNameImport" id="cdk-private-asset-bucket.PrivateAssetBucketProps.property.assetBucketNameImport"></a>
+
+```typescript
+public readonly assetBucketNameImport: string;
+```
+
+- *Type:* string
+
+if you want to use an imported bucket instead.
 
 ---
 
