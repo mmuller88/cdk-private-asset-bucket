@@ -40,14 +40,14 @@ const project = new awscdk.AwsCdkConstructLibrary({
   cdkDependencies,
   bundledDeps: [
     '@types/aws-lambda',
-    'aws-jwt-verify',
+    // 'aws-jwt-verify',
     'aws-lambda',
   ],
   peerDeps: [
     // 'aws-jwt-verify',
   ],
   devDeps: [
-    'aws-jwt-verify',
+    // 'aws-jwt-verify',
     'aws-lambda',
     '@types/aws-lambda',
     `aws-cdk@${cdkVersion}`,

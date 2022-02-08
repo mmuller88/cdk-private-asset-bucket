@@ -65,10 +65,6 @@
       "type": "build"
     },
     {
-      "name": "aws-jwt-verify",
-      "type": "build"
-    },
-    {
       "name": "aws-lambda",
       "type": "build"
     },
@@ -138,10 +134,6 @@
     },
     {
       "name": "@types/aws-lambda",
-      "type": "bundled"
-    },
-    {
-      "name": "aws-jwt-verify",
       "type": "bundled"
     },
     {

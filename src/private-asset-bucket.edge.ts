@@ -1,5 +1,6 @@
-import { CognitoJwtVerifier } from 'aws-jwt-verify';
+// import { CognitoJwtVerifier } from 'aws-jwt-verify';
 import * as lambda from 'aws-lambda';
+import { CognitoJwtVerifier } from './aws-jwt-verify-ripout/cognito-verifier';
 
 export async function handler(event: lambda.CloudFrontRequestEvent) {
   console.debug(`event: ${JSON.stringify(event)}`);
