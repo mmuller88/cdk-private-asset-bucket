@@ -35,7 +35,7 @@
     "synth": "./node_modules/.bin/cdk synth"
   },
   "author": {
-    "name": "Martin Mueller",
+    "name": "Martin Mueller https://martinmueller.dev/resume",
     "email": "damadden88@googlemail.com",
     "organization": false
   },

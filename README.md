@@ -103,12 +103,15 @@ echo "curl --location --request GET "https://$CFD/pic.png" --cookie "Cookie: tok
 
 - Support S3 bucket import ootb.
 - Support custom authorizer
+- Leverage Cloudfront Function for cheaper costs
+
+## Misc
+
+- There is currently my aws-cdk PR open for importing the Typescript Lambda@Edge interface https://github.com/aws/aws-cdk/pull/18836
 
 ## Thanks To
 
 - Crespo Wang for his pioneer work regarding private S3 assets https://javascript.plainenglish.io/use-lambda-edge-jwt-to-secure-s3-bucket-dcca6eec4d7e
 - As always to the amazing CDK / Projen Community. Join us on [Slack](https://cdk-dev.slack.com)!
 - [Projen](https://github.com/projen/projen) project and the community around it
-
-
-    
+- To you for checking this out. Check me out and perhaps give me feedback https://martinmueller.dev
