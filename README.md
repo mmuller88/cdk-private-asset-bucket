@@ -11,6 +11,57 @@ A construct to create a private asset S3 bucket. Cognito will be used for token 
 
 ![Diagram](misc/cdkPrivateAssetBucket.drawio.png)
 
+# Example
+```ts
+import { ProwlerAudit } from 'cdk-prowler';
+...
+    const app = new core.App();
+
+    const stack = new core.Stack(app, 'PrivateAssetBucket-stack2', {
+      env: {
+        account: '981237193288',
+        region: 'us-east-1',
+      },
+    });
+
+    const userPool = new cognito.UserPool(stack, 'userPool', {
+      removalPolicy: core.RemovalPolicy.DESTROY,
+    });
+
+    const userPoolWebClient = new cognito.UserPoolClient(stack, 'userPoolWebClient', {
+      userPool: userPool,
+      generateSecret: false,
+      preventUserExistenceErrors: true,
+      authFlows: {
+        adminUserPassword: true,
+        userPassword: true,
+      },
+      oAuth: {
+        flows: {
+          authorizationCodeGrant: false,
+          implicitCodeGrant: true,
+        },
+      },
+    });
+
+    const privateAssetBucket = new PrivateAssetBucket(stack, 'privateAssetBucket', {
+      userPoolId: userPool.userPoolId,
+      userPoolClientId: userPoolWebClient.userPoolClientId,
+    });
+
+    new core.CfnOutput(stack, 'AssetBucketName', {
+      value: privateAssetBucket.assetBucketName,
+    });
+
+    new core.CfnOutput(stack, 'AssetBucketCloudfrontUrl', {
+      value: privateAssetBucket.assetBucketCloudfrontUrl,
+    });
+```
+
+## Properties
+
+![API.md](API.md)
+
 ## Test PrivateBucketAsset
 
 If you forged / cloned that repo you can test directly from here. Don't forget to init with:
@@ -42,7 +93,7 @@ aws cognito-idp admin-create-user --user-pool-id $USER_POOL_ID --username $USER_
 aws cognito-idp admin-set-user-password --user-pool-id $USER_POOL_ID --username $USER_NAME --password $USER_PASSWORD  --permanent --region $REGION
 ACCESS_TOKEN=$(aws cognito-idp initiate-auth --auth-flow USER_PASSWORD_AUTH --client-id $CLIENT_ID --auth-parameters USERNAME=$USER_NAME,PASSWORD=$USER_PASSWORD  --region $REGION | jq -r '.AuthenticationResult.AccessToken')
 
-echo "curl --location --request GET \"https://$CFD/pic.png\" --cookie \"Cookie: token=$ACCESS_TOKEN\""
+echo "curl --location --request GET "https://$CFD/pic.png" --cookie "Cookie: token=$ACCESS_TOKEN""
 ```
 
 - You can use the curl for importing in Postman. but it looks like Postman can't import the cookie. So you need to set the cookie manually in Postman!
@@ -58,3 +109,6 @@ echo "curl --location --request GET \"https://$CFD/pic.png\" --cookie \"Cookie: 
 - Crespo Wang for his pioneer work regarding private S3 assets https://javascript.plainenglish.io/use-lambda-edge-jwt-to-secure-s3-bucket-dcca6eec4d7e
 - As always to the amazing CDK / Projen Community. Join us on [Slack](https://cdk-dev.slack.com)!
 - [Projen](https://github.com/projen/projen) project and the community around it
+
+
+    
