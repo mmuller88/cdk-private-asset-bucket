@@ -1,4 +1,3 @@
-// import { CognitoJwtVerifier } from 'aws-jwt-verify';
 import * as lambda from 'aws-lambda';
 import { CognitoJwtVerifier } from './aws-jwt-verify-ripout/cognito-verifier';
 
@@ -17,10 +16,10 @@ export async function handler(event: lambda.CloudFrontRequestEvent) {
   //         ],
   //     },
   // }
-  // Consider using Postman with collection in test/Test.postman_collection.json for testing like with cookies.
+  // Consider using Postman with collection in devops/test/Test.postman_collection.json for testing like with cookies.
   // For Debugging with Cloudwatch go to the AWS Console --> Cloudwatch --> Log groups --> switch to the region you are closest to --> figure out which log group is correct
 
-  const token = request.headers.cookie.filter(cookie => cookie.key === 'Cookie' && cookie.value.startsWith('token'))?.[0].value.substring(6);
+  const token = (request.headers.cookie?.filter(cookie => cookie.key === 'Cookie' && cookie.value.startsWith('token'))?.[0]?.value.substring(6)) || 'notValid';
   if (token) {
     console.debug('got token in cookie');
 
@@ -40,10 +39,10 @@ export async function handler(event: lambda.CloudFrontRequestEvent) {
       console.debug('Token is valid. Payload:', payload);
       return request;
     } catch {
-      console.error('Invalid JWT token');
+      console.error(`Unauthorized JWT ${token === 'notValid' ? 'missing token' : ''}`);
       const response = {
         status: '401',
-        statusDescription: 'Unauthorized JWT',
+        statusDescription: `Unauthorized JWT ${token === 'notValid' ? 'missing token' : ''}`,
         headers: {
           location: [
             {

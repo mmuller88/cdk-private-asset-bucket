@@ -7,6 +7,39 @@
 
 A construct to create a private asset S3 bucket. Cognito will be used for token validation with Lambda@Edge.
 
+## Test PrivateBucketAsset
+
+Create a test cdk stack with one of the following:
+
+```bash
+yarn cdk deploy
+yarn cdk deploy --watch
+yarn cdk deploy --require-approval never
+```
+
+- Upload a picture named like pic.png to the private asset bucket
+- Create a user pool user and get / save the token:
+
+```bash
+USER_POOL_ID=us-east-1_0Aw1oPvD6
+CLIENT_ID=3eqcgvghjbv4d5rv32hopmadu8
+USER_NAME=martindev
+USER_PASSWORD=M@rtindev1
+REGION=us-east-1
+CFD=d1f2bfdek3mzi7.cloudfront.net
+
+aws cognito-idp admin-create-user --user-pool-id $USER_POOL_ID --username $USER_NAME --region $REGION
+aws cognito-idp admin-set-user-password --user-pool-id $USER_POOL_ID --username $USER_NAME --password $USER_PASSWORD  --permanent --region $REGION
+ACCESS_TOKEN=$(aws cognito-idp initiate-auth --auth-flow USER_PASSWORD_AUTH --client-id $CLIENT_ID --auth-parameters USERNAME=$USER_NAME,PASSWORD=$USER_PASSWORD  --region $REGION | jq -r '.AuthenticationResult.AccessToken')
+
+echo $ACCESS_TOKEN
+
+echo "curl --location --request GET \"https://$CFD/pic.png\" --cookie \"Cookie: token=$ACCESS_TOKEN\""
+```
+
+- you can use the curl for importing in Postman. but it looks like Postman can't import the cookie. So you need to set the cookie manually in Postman!
+- In Postman you should see your picture :)
+
 ## Planned Features
 
 - Support S3 bucket import ootb.

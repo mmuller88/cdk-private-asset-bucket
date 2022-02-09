@@ -1,5 +1,6 @@
 import { assertStringArrayContainsString, assertStringArraysOverlap, assertStringEquals } from './assert';
 import { CognitoJwtInvalidClientIdError, CognitoJwtInvalidGroupError, CognitoJwtInvalidTokenUseError, JwtInvalidClaimError } from './error';
+import { JwtRsaVerifierBase, JwtRsaVerifierProperties } from './jwt-rsa';
 
 /**
  * Class representing a verifier for JWTs signed by Amazon Cognito
@@ -455,122 +456,6 @@ export interface CognitoVerifyProperties {
    * The `rawJwt` will only be included in the Error object, if the JWT's signature can at least be verified.
    */
   includeRawJwtInErrors?: boolean;
-}
-
-export declare type JwtRsaVerifierProperties<VerifyProps> = {
-  /**
-   * URI where the JWKS (JSON Web Key Set) can be downloaded from.
-   * The JWKS contains one or more JWKs, which represent the public keys with which
-   * JWTs have been signed.
-   */
-  jwksUri?: string;
-  /**
-   * The issuer of the JWTs you want to verify.
-   * Set this to the expected value of the `iss` claim in the JWT.
-   */
-  issuer: string;
-} & Partial<VerifyProps>;
-
-/**
- * Abstract class representing a verifier for JWTs signed with RSA (e.g. RS256, RS384, RS512)
- *
- * A class is used, because there is state:
- * - The JWKS is fetched (downloaded) from the JWKS URI and cached in memory
- * - Verification properties at verifier level, are used as default options for individual verify calls
- *
- * When instantiating this class, relevant type parameters should be provided, for your concrete case:
- * @param StillToProvide The verification options that you want callers of verify to provide on individual verify calls
- * @param SpecificVerifyProperties The verification options that you'll use
- * @param IssuerConfig The issuer config that you'll use (config options are used as default verification options)
- * @param MultiIssuer Verify multiple issuers (true) or just a single one (false)
- */
-// eslint-disable-next-line max-len
-export declare abstract class JwtRsaVerifierBase<SpecificVerifyProperties, IssuerConfig extends JwtRsaVerifierProperties<SpecificVerifyProperties>, MultiIssuer extends boolean> {
-  private jwksCache;
-  private issuersConfig;
-  private publicKeyCache;
-  /**
-   * Get issuer config with JWKS URI, by adding a default JWKS URI if needed
-   *
-   * @param config: the issuer config.
-   * @returns The config with JWKS URI
-   */
-  private withJwksUri;
-  protected constructor(verifyProperties: IssuerConfig | IssuerConfig[], jwksCache?: JwksCache);
-  protected get expectedIssuers(): string[];
-  protected getIssuerConfig(issuer?: string): IssuerConfig & {
-    jwksUri: string;
-  };
-  /**
-   * This method loads a JWKS that you provide, into the JWKS cache, so that it is
-   * available for JWT verification. Use this method to speed up the first JWT verification
-   * (when the JWKS would otherwise have to be downloaded from the JWKS uri), or to provide the JWKS
-   * in case the JwtVerifier does not have internet access to download the JWKS
-   *
-   * @param jwksThe JWKS
-   * @param issuer The issuer for which you want to cache the JWKS
-   *  Supply this field, if you instantiated the JwtVerifier with multiple issuers
-   * @returns void
-   */
-  // cacheJwks(...[jwks, issuer]: MultiIssuer extends false ? [jwks: Jwks, issuer?: string] : [jwks: Jwks, issuer: string]): void;
-  /**
-   * Hydrate the JWKS cache for (all of) the configured issuer(s).
-   * This will fetch and cache the latest and greatest JWKS for concerned issuer(s).
-   *
-   * @param issuer The issuer to fetch the JWKS for
-   * @returns void
-   */
-  hydrate(): Promise<void>;
-  /**
-   * Verify (synchronously) a JWT that is signed using RS256 / RS384 / RS512.
-   *
-   * @param jwt The JWT, as string
-   * @param props Verification properties
-   * @returns The payload of the JWT––if the JWT is valid, otherwise an error is thrown
-   */
-  verifySync(...[jwt, properties]: any): JwtPayload;
-  /**
-   * Verify (synchronously) an already decomposed JWT, that is signed using RS256 / RS384 / RS512.
-   *
-   * @param decomposedJwt The decomposed Jwt
-   * @param jwk The JWK to verify the JWTs signature with
-   * @param verifyProperties The properties to use for verification
-   * @returns The payload of the JWT––if the JWT is valid, otherwise an error is thrown
-   */
-  protected verifyDecomposedJwtSync(decomposedJwt: DecomposedJwt, jwksUri: string, verifyProperties: SpecificVerifyProperties): JwtPayload;
-  /**
-   * Verify (asynchronously) a JWT that is signed using RS256 / RS384 / RS512.
-   * This call is asynchronous, and the JWKS will be fetched from the JWKS uri,
-   * in case it is not yet available in the cache.
-   *
-   * @param jwt The JWT, as string
-   * @param props Verification properties
-   * @returns Promise that resolves to the payload of the JWT––if the JWT is valid, otherwise the promise rejects
-   */
-  verify(...[jwt, properties]: any): Promise<JwtPayload>;
-  /**
-   * Verify (asynchronously) an already decomposed JWT, that is signed using RS256 / RS384 / RS512.
-   *
-   * @param decomposedJwt The decomposed Jwt
-   * @param jwk The JWK to verify the JWTs signature with
-   * @param verifyProperties The properties to use for verification
-   * @returns The payload of the JWT––if the JWT is valid, otherwise an error is thrown
-   */
-  protected verifyDecomposedJwt(decomposedJwt: DecomposedJwt, jwksUri: string, verifyProperties: SpecificVerifyProperties): Promise<JwtPayload>;
-  /**
-   * Get the verification parameters to use, by merging the issuer configuration,
-   * with the overriding properties that are now provided
-   *
-   * @param jwt: the JWT that is going to be verified
-   * @param verifyProperties: the overriding properties, that override the issuer configuration
-   * @returns The merged verification parameters
-   */
-  protected getVerifyParameters(jwt: string, verifyProperties?: Partial<SpecificVerifyProperties>): {
-    decomposedJwt: DecomposedJwt;
-    jwksUri: string;
-    verifyProperties: SpecificVerifyProperties;
-  };
-
 }
 
 /**

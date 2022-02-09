@@ -8,7 +8,12 @@ export class IntegTesting {
   constructor() {
     const app = new core.App();
 
-    const stack = new core.Stack(app, 'PrivateAssetBucket-stack');
+    const stack = new core.Stack(app, 'PrivateAssetBucket-stack2', {
+      env: {
+        account: '981237193288',
+        region: 'us-east-1',
+      },
+    });
 
     const userPool = new cognito.UserPool(stack, 'userPool', {
       removalPolicy: core.RemovalPolicy.DESTROY,
@@ -18,6 +23,10 @@ export class IntegTesting {
       userPool: userPool,
       generateSecret: false,
       preventUserExistenceErrors: true,
+      authFlows: {
+        adminUserPassword: true,
+        userPassword: true,
+      },
       oAuth: {
         flows: {
           authorizationCodeGrant: false,
@@ -26,9 +35,17 @@ export class IntegTesting {
       },
     });
 
-    new PrivateAssetBucket(stack, 'ProwlerAudit', {
+    const privateAssetBucket = new PrivateAssetBucket(stack, 'privateAssetBucket', {
       userPoolId: userPool.userPoolId,
       userPoolClientId: userPoolWebClient.userPoolClientId,
+    });
+
+    new core.CfnOutput(stack, 'AssetBucketName', {
+      value: privateAssetBucket.assetBucketName,
+    });
+
+    new core.CfnOutput(stack, 'AssetBucketCloudfrontUrl', {
+      value: privateAssetBucket.assetBucketCloudfrontUrl,
     });
 
     this.stack = [stack];
