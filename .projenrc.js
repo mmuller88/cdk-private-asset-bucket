@@ -94,7 +94,7 @@ ${example.join('\n')}
 
 ## Properties
 
-![API.md](API.md)
+[API.md](API.md)
     
 ## Test PrivateBucketAsset
 
