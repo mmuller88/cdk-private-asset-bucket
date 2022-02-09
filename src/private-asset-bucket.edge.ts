@@ -16,8 +16,7 @@ export async function handler(event: lambda.CloudFrontRequestEvent) {
   //         ],
   //     },
   // }
-  // Consider using Postman with collection in devops/test/Test.postman_collection.json for testing like with cookies.
-  // For Debugging with Cloudwatch go to the AWS Console --> Cloudwatch --> Log groups --> switch to the region you are closest to --> figure out which log group is correct
+  // Consider using Postman for testing like with cookies. See more in the Readme.
 
   const token = (request.headers.cookie?.filter(cookie => cookie.key === 'Cookie' && cookie.value.startsWith('token'))?.[0]?.value.substring(6)) || 'notValid';
   if (token) {

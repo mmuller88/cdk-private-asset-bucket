@@ -90,6 +90,7 @@ echo "curl --location --request GET "https://$CFD/pic.png" --cookie "Cookie: tok
 
 - You can use the curl for importing in Postman. but it looks like Postman can't import the cookie. So you need to set the cookie manually in Postman!
 - In Postman you should see your picture :)
+- For Debugging the Lambda@Edge with Cloudwatch go to the AWS Console --> Cloudwatch --> Log groups --> switch to the region you are closest to --> figure out which log group is correct
 
 ## Planned Features
 
