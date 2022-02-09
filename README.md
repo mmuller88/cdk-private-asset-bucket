@@ -60,7 +60,7 @@ import { ProwlerAudit } from 'cdk-prowler';
 
 ## Properties
 
-![API.md](API.md)
+[API.md](API.md)
 
 ## Test PrivateBucketAsset
 
