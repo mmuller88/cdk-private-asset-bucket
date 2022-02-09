@@ -7,7 +7,17 @@
 
 A construct to create a private asset S3 bucket. Cognito will be used for token validation with Lambda@Edge.
 
+## Architecture
+
+![Diagram](misc/cdkPrivateAssetBucket.drawio.png)
+
 ## Test PrivateBucketAsset
+
+If you forged / cloned that repo you can test directly from here. Don't forget to init with:
+
+```bash
+yarn install
+```
 
 Create a test cdk stack with one of the following:
 
@@ -32,12 +42,10 @@ aws cognito-idp admin-create-user --user-pool-id $USER_POOL_ID --username $USER_
 aws cognito-idp admin-set-user-password --user-pool-id $USER_POOL_ID --username $USER_NAME --password $USER_PASSWORD  --permanent --region $REGION
 ACCESS_TOKEN=$(aws cognito-idp initiate-auth --auth-flow USER_PASSWORD_AUTH --client-id $CLIENT_ID --auth-parameters USERNAME=$USER_NAME,PASSWORD=$USER_PASSWORD  --region $REGION | jq -r '.AuthenticationResult.AccessToken')
 
-echo $ACCESS_TOKEN
-
 echo "curl --location --request GET \"https://$CFD/pic.png\" --cookie \"Cookie: token=$ACCESS_TOKEN\""
 ```
 
-- you can use the curl for importing in Postman. but it looks like Postman can't import the cookie. So you need to set the cookie manually in Postman!
+- You can use the curl for importing in Postman. but it looks like Postman can't import the cookie. So you need to set the cookie manually in Postman!
 - In Postman you should see your picture :)
 
 ## Planned Features
