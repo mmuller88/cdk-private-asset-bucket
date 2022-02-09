@@ -13,7 +13,7 @@ A construct to create a private asset S3 bucket. Cognito will be used for token 
 
 # Example
 ```ts
-import { ProwlerAudit } from 'cdk-prowler';
+import { PrivateAssetBucket } from 'cdk-private-assets-bucket';
 ...
     const app = new core.App();
 
