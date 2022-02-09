@@ -4,7 +4,7 @@ const { awscdk } = require('projen');
 const exampleFile = fs
   .readFileSync('src/integ.default.ts', 'utf8')
   .split('\n');
-const example = exampleFile.slice(8, exampleFile.length - 7);
+const example = exampleFile.slice(17, exampleFile.length - 7);
 
 const cdkVersion = '1.143.0';
 
@@ -86,16 +86,17 @@ A construct to create a private asset S3 bucket. Cognito will be used for token 
 ![Diagram](misc/cdkPrivateAssetBucket.drawio.png)
 
 # Example
+
 \`\`\`ts
-import { PrivateAssetBucket } from 'cdk-private-assets-bucket';
-...
+    import { PrivateAssetBucket } from 'cdk-private-assets-bucket';
+    ...
 ${example.join('\n')}
 \`\`\`
 
 ## Properties
 
 [API.md](API.md)
-    
+
 ## Test PrivateBucketAsset
 
 If you forged / cloned that repo you can test directly from here. Don't forget to init with:
@@ -135,6 +136,7 @@ echo "curl --location --request GET \"https://$CFD/pic.png\" --cookie \"Cookie: 
 
 ## Planned Features
 
+- Migrating to cdk v2. If you know a cool workflow how to continuously support v1 and v2 let me know!
 - Support S3 bucket import ootb.
 - Support custom authorizer
 - Leverage Cloudfront Function for cheaper costs
@@ -149,8 +151,7 @@ echo "curl --location --request GET \"https://$CFD/pic.png\" --cookie \"Cookie: 
 - As always to the amazing CDK / Projen Community. Join us on [Slack](https://cdk-dev.slack.com)!
 - [Projen](https://github.com/projen/projen) project and the community around it
 - To you for checking this out. Check me out and perhaps give me feedback https://martinmueller.dev
-
-    `,
+`,
   },
 });
 

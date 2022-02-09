@@ -12,18 +12,10 @@ A construct to create a private asset S3 bucket. Cognito will be used for token 
 ![Diagram](misc/cdkPrivateAssetBucket.drawio.png)
 
 # Example
+
 ```ts
-import { PrivateAssetBucket } from 'cdk-private-assets-bucket';
-...
-    const app = new core.App();
-
-    const stack = new core.Stack(app, 'PrivateAssetBucket-stack2', {
-      env: {
-        account: '981237193288',
-        region: 'us-east-1',
-      },
-    });
-
+    import { PrivateAssetBucket } from 'cdk-private-assets-bucket';
+    ...
     const userPool = new cognito.UserPool(stack, 'userPool', {
       removalPolicy: core.RemovalPolicy.DESTROY,
     });
@@ -101,6 +93,7 @@ echo "curl --location --request GET "https://$CFD/pic.png" --cookie "Cookie: tok
 
 ## Planned Features
 
+- Migrating to cdk v2. If you know a cool workflow how to continuously support v1 and v2 let me know!
 - Support S3 bucket import ootb.
 - Support custom authorizer
 - Leverage Cloudfront Function for cheaper costs
