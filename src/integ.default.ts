@@ -1,5 +1,5 @@
-import * as cognito from '@aws-cdk/aws-cognito';
-import * as core from '@aws-cdk/core';
+import * as core from 'aws-cdk-lib';
+import * as cognito from 'aws-cdk-lib/aws-cognito';
 
 import { PrivateAssetBucket } from '../src/index';
 

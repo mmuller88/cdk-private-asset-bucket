@@ -1,13 +1,12 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as cloudfront from '@aws-cdk/aws-cloudfront';
-import * as lambda from '@aws-cdk/aws-lambda';
-import { BundlingOptions } from '@aws-cdk/aws-lambda-nodejs';
-import * as bundling from '@aws-cdk/aws-lambda-nodejs/lib/bundling';
-import { PackageManager } from '@aws-cdk/aws-lambda-nodejs/lib/package-manager';
-import { callsites, findUpMultiple } from '@aws-cdk/aws-lambda-nodejs/lib/util';
-import * as core from '@aws-cdk/core';
-
+import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+import { BundlingOptions } from 'aws-cdk-lib/aws-lambda-nodejs';
+import { Bundling } from 'aws-cdk-lib/aws-lambda-nodejs/lib/bundling';
+import { PackageManager } from 'aws-cdk-lib/aws-lambda-nodejs/lib/package-manager';
+import { callsites, findUpMultiple } from 'aws-cdk-lib/aws-lambda-nodejs/lib/util';
+import { Construct } from 'constructs';
 
 /**
  * environment variables are not supported for Lambda@Edge
@@ -91,7 +90,7 @@ export interface NodejsEdgeFunctionProps extends Omit<lambda.FunctionOptions, 'e
 
 export class NodejsEdgeFunction extends cloudfront.experimental.EdgeFunction {
 
-  constructor(scope: core.Construct, id: string, props: NodejsEdgeFunctionProps = {}) {
+  constructor(scope: Construct, id: string, props: NodejsEdgeFunctionProps = {}) {
     const handler = props.handler ?? 'handler';
     const runtime = props.runtime ?? lambda.Runtime.NODEJS_14_X;
     const entry = path.resolve(findEntry(id, props.entry));
@@ -102,7 +101,7 @@ export class NodejsEdgeFunction extends cloudfront.experimental.EdgeFunction {
       ...props,
       runtime,
       stackId: props.stackId,
-      code: bundling.Bundling.bundle({
+      code: Bundling.bundle({
         ...props.bundling ?? {},
         architecture,
         runtime,

@@ -1,12 +1,13 @@
-import * as certificatemanager from '@aws-cdk/aws-certificatemanager';
-import * as cloudfront from '@aws-cdk/aws-cloudfront';
-import * as origins from '@aws-cdk/aws-cloudfront-origins';
-import * as iam from '@aws-cdk/aws-iam';
-import * as route53 from '@aws-cdk/aws-route53';
-import * as route53Targets from '@aws-cdk/aws-route53-targets';
-import * as s3 from '@aws-cdk/aws-s3';
-import * as core from '@aws-cdk/core';
+import * as certificatemanager from 'aws-cdk-lib/aws-certificatemanager';
+import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
+import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
+import * as iam from 'aws-cdk-lib/aws-iam';
+import * as route53 from 'aws-cdk-lib/aws-route53';
+import * as route53Targets from 'aws-cdk-lib/aws-route53-targets';
+import * as s3 from 'aws-cdk-lib/aws-s3';
+import { Construct } from 'constructs';
 import { NodejsEdgeFunction } from './nodejs-edge-function';
+
 
 export interface PrivateAssetBucketProps {
   readonly assetBucketName?: string;
@@ -28,13 +29,13 @@ export interface CustomDomain {
   readonly domainName: string;
 }
 
-export class PrivateAssetBucket extends core.Construct {
+export class PrivateAssetBucket extends Construct {
 
   assetBucketName: string;
   assetBucketCloudfrontUrl: string;
   assetBucketRecordDomainName: string | undefined;
 
-  constructor(scope: core.Construct, id: string, props: PrivateAssetBucketProps) {
+  constructor(scope: Construct, id: string, props: PrivateAssetBucketProps) {
     super(scope, id);
 
     let assetBucket: s3.IBucket;
