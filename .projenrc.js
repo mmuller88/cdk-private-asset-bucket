@@ -18,7 +18,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   defaultReleaseBranch: 'main',
   name: 'cdk-private-asset-bucket',
   repositoryUrl: 'https://github.com/mmuller88/cdk-private-asset-bucket',
-  projenUpgradeSecret: 'PROJEN_GITHUB_TOKEN',
+  // projenUpgradeSecret: 'PROJEN_GITHUB_TOKEN',
   autoApproveOptions: {
     allowedUsernames: ['aws-cdk-automation', 'github-bot'],
     secret: 'GITHUB_TOKEN',
