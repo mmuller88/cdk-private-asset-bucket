@@ -18,6 +18,13 @@ export interface PrivateAssetBucketProps {
   readonly customDomain?: CustomDomain;
   readonly userPoolId: string;
   readonly userPoolClientId: string;
+
+  /**
+   * The token use that you expect to be present in the JWT's token_use claim.
+   * Usually you are verifying either Access token (common) or ID token (less common).
+   * Pass null explicitly to not check the JWT's token use--if you know what you're doing
+   */
+  readonly tokenUse: 'access' | 'id' | null;
 }
 
 export interface CustomDomain {
@@ -79,6 +86,7 @@ export class PrivateAssetBucket extends Construct {
             // Need to ingest the userpool infor through headers as enviornment variables aren't supported for Lambda@Edge
             'x-env-userpoolid': props.userPoolId,
             'x-env-clientid': props.userPoolClientId,
+            'x-env-tokenuse': 'id',
           },
         }),
         edgeLambdas: [

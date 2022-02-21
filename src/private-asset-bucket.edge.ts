@@ -24,13 +24,14 @@ export async function handler(event: lambda.CloudFrontRequestEvent) {
 
     const userPoolId = request.origin?.s3?.customHeaders['x-env-userpoolid'][0].value || '';
     const clientId = request.origin?.s3?.customHeaders['x-env-clientid'][0].value || '';
+    const tokenUse = request.origin?.s3?.customHeaders['x-env-tokenuse'][0].value || 'access';
 
     console.debug(`userPoolId: ${userPoolId}`);
     console.debug(`clientId: ${clientId}`);
 
     const verifier = CognitoJwtVerifier.create({
       userPoolId,
-      tokenUse: 'access',
+      tokenUse: tokenUse === 'access' ? 'access' : 'id',
       clientId,
     });
     try {
