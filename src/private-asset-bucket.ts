@@ -35,13 +35,13 @@ export interface CustomDomain {
   readonly domainName: string;
 }
 
-export class PrivateAssetBucket extends Construct {
+export class PrivateAssetBucket extends core.Construct {
 
   assetBucketName: string;
   assetBucketCloudfrontUrl: string;
   assetBucketRecordDomainName: string | undefined;
 
-  constructor(scope: Construct, id: string, props: PrivateAssetBucketProps) {
+  constructor(scope: core.Construct, id: string, props: PrivateAssetBucketProps) {
     super(scope, id);
 
     let assetBucket: s3.IBucket;
@@ -85,7 +85,7 @@ export class PrivateAssetBucket extends Construct {
             // Need to ingest the userpool infor through headers as enviornment variables aren't supported for Lambda@Edge
             'x-env-userpoolid': props.userPoolId,
             'x-env-clientid': props.userPoolClientId,
-            'x-env-tokenuse': props.tokenUse ?? null,
+            'x-env-tokenuse': props.tokenUse || 'null',
           },
         }),
         edgeLambdas: [
