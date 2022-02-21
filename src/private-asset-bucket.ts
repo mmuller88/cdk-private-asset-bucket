@@ -17,6 +17,13 @@ export interface PrivateAssetBucketProps {
   readonly customDomain?: CustomDomain;
   readonly userPoolId: string;
   readonly userPoolClientId: string;
+
+  /**
+   * The token use that you expect to be present in the JWT's token_use claim.
+   * Usually you are verifying either Access token (common) or ID token (less common).
+   * Pass null explicitly to not check the JWT's token use--if you know what you're doing
+   */
+  readonly tokenUse: 'access' | 'id' | null;
 }
 
 export interface CustomDomain {
@@ -28,13 +35,13 @@ export interface CustomDomain {
   readonly domainName: string;
 }
 
-export class PrivateAssetBucket extends core.Construct {
+export class PrivateAssetBucket extends Construct {
 
   assetBucketName: string;
   assetBucketCloudfrontUrl: string;
   assetBucketRecordDomainName: string | undefined;
 
-  constructor(scope: core.Construct, id: string, props: PrivateAssetBucketProps) {
+  constructor(scope: Construct, id: string, props: PrivateAssetBucketProps) {
     super(scope, id);
 
     let assetBucket: s3.IBucket;
@@ -78,6 +85,7 @@ export class PrivateAssetBucket extends core.Construct {
             // Need to ingest the userpool infor through headers as enviornment variables aren't supported for Lambda@Edge
             'x-env-userpoolid': props.userPoolId,
             'x-env-clientid': props.userPoolClientId,
+            'x-env-tokenuse': 'id',
           },
         }),
         edgeLambdas: [
