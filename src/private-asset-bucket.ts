@@ -23,7 +23,7 @@ export interface PrivateAssetBucketProps {
    * Usually you are verifying either Access token (common) or ID token (less common).
    * Pass null explicitly to not check the JWT's token use--if you know what you're doing
    */
-  readonly tokenUse: 'access' | 'id' | null;
+  readonly tokenUse?: 'access' | 'id';
 }
 
 export interface CustomDomain {
@@ -85,7 +85,7 @@ export class PrivateAssetBucket extends Construct {
             // Need to ingest the userpool infor through headers as enviornment variables aren't supported for Lambda@Edge
             'x-env-userpoolid': props.userPoolId,
             'x-env-clientid': props.userPoolClientId,
-            'x-env-tokenuse': 'id',
+            'x-env-tokenuse': props.tokenUse ?? null,
           },
         }),
         edgeLambdas: [
