@@ -38,6 +38,7 @@ export class IntegTesting {
     const privateAssetBucket = new PrivateAssetBucket(stack, 'privateAssetBucket', {
       userPoolId: userPool.userPoolId,
       userPoolClientId: userPoolWebClient.userPoolClientId,
+      tokenUse: 'access',
     });
 
     new core.CfnOutput(stack, 'AssetBucketName', {

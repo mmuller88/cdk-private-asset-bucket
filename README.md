@@ -39,6 +39,7 @@ A construct to create a private asset S3 bucket. Cognito will be used for token 
     const privateAssetBucket = new PrivateAssetBucket(stack, 'privateAssetBucket', {
       userPoolId: userPool.userPoolId,
       userPoolClientId: userPoolWebClient.userPoolClientId,
+      tokenUse: 'access',
     });
 
     new core.CfnOutput(stack, 'AssetBucketName', {
