@@ -143,6 +143,7 @@ const privateAssetBucketProps: PrivateAssetBucketProps = { ... }
 | <code><a href="#cdk-private-asset-bucket.PrivateAssetBucketProps.property.assetBucketName">assetBucketName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cdk-private-asset-bucket.PrivateAssetBucketProps.property.assetBucketNameImport">assetBucketNameImport</a></code> | <code>string</code> | if you want to use an imported bucket instead. |
 | <code><a href="#cdk-private-asset-bucket.PrivateAssetBucketProps.property.customDomain">customDomain</a></code> | <code><a href="#cdk-private-asset-bucket.CustomDomain">CustomDomain</a></code> | *No description.* |
+| <code><a href="#cdk-private-asset-bucket.PrivateAssetBucketProps.property.tokenUse">tokenUse</a></code> | <code>string</code> | The token use that you expect to be present in the JWT's token_use claim. |
 
 ---
 
@@ -195,6 +196,20 @@ public readonly customDomain: CustomDomain;
 ```
 
 - *Type:* <a href="#cdk-private-asset-bucket.CustomDomain">CustomDomain</a>
+
+---
+
+##### `tokenUse`<sup>Optional</sup> <a name="tokenUse" id="cdk-private-asset-bucket.PrivateAssetBucketProps.property.tokenUse"></a>
+
+```typescript
+public readonly tokenUse: string;
+```
+
+- *Type:* string
+
+The token use that you expect to be present in the JWT's token_use claim.
+
+Usually you are verifying either Access token (common) or ID token (less common). Pass null explicitly to not check the JWT's token use--if you know what you're doing
 
 ---
 
