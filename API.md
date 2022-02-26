@@ -38,15 +38,66 @@ new PrivateAssetBucket(scope: Construct, id: string, props: PrivateAssetBucketPr
 
 ---
 
+#### Methods <a name="Methods" id="Methods"></a>
 
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.toString">toString</a></code> | Returns a string representation of this construct. |
+
+---
+
+##### `toString` <a name="toString" id="cdk-private-asset-bucket.PrivateAssetBucket.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.isConstruct">isConstruct</a></code> | Return whether the given object is a Construct. |
+
+---
+
+##### `isConstruct` <a name="isConstruct" id="cdk-private-asset-bucket.PrivateAssetBucket.isConstruct"></a>
+
+```typescript
+import { PrivateAssetBucket } from 'cdk-private-asset-bucket'
+
+PrivateAssetBucket.isConstruct(x: any)
+```
+
+Return whether the given object is a Construct.
+
+###### `x`<sup>Required</sup> <a name="x" id="cdk-private-asset-bucket.PrivateAssetBucket.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+---
 
 #### Properties <a name="Properties" id="Properties"></a>
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.property.node">node</a></code> | <code>@aws-cdk/core.ConstructNode</code> | The construct tree node associated with this construct. |
 | <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.property.assetBucketCloudfrontUrl">assetBucketCloudfrontUrl</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.property.assetBucketName">assetBucketName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.property.assetBucketRecordDomainName">assetBucketRecordDomainName</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="cdk-private-asset-bucket.PrivateAssetBucket.property.node"></a>
+
+```typescript
+public readonly node: ConstructNode;
+```
+
+- *Type:* @aws-cdk/core.ConstructNode
+
+The construct tree node associated with this construct.
 
 ---
 
