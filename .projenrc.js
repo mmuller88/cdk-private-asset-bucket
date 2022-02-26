@@ -6,7 +6,7 @@ const exampleFile = fs
   .split('\n');
 const example = exampleFile.slice(17, exampleFile.length - 7);
 
-const cdkVersion = '1.145.0';
+const cdkVersion = '1.146.0';
 
 const cdkDependencies = [
   '@aws-cdk/aws-certificatemanager',
