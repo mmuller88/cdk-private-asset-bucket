@@ -4,7 +4,7 @@ import * as cloudfront from '@aws-cdk/aws-cloudfront';
 import * as lambda from '@aws-cdk/aws-lambda';
 import { BundlingOptions } from '@aws-cdk/aws-lambda-nodejs';
 import * as bundling from '@aws-cdk/aws-lambda-nodejs/lib/bundling';
-import { PackageManager } from '@aws-cdk/aws-lambda-nodejs/lib/package-manager';
+import { LockFile } from '@aws-cdk/aws-lambda-nodejs/lib/package-manager';
 import { callsites, findUpMultiple } from '@aws-cdk/aws-lambda-nodejs/lib/util';
 import * as core from '@aws-cdk/core';
 
@@ -132,9 +132,9 @@ function findLockFile(depsLockFilePath?: string): string {
   }
 
   const lockFiles = findUpMultiple([
-    PackageManager.PNPM.lockFile,
-    PackageManager.YARN.lockFile,
-    PackageManager.NPM.lockFile,
+    LockFile.PNPM,
+    LockFile.YARN,
+    LockFile.NPM,
   ]);
 
   if (lockFiles.length === 0) {
