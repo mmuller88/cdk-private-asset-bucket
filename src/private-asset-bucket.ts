@@ -6,6 +6,8 @@ import * as route53 from '@aws-cdk/aws-route53';
 import * as route53Targets from '@aws-cdk/aws-route53-targets';
 import * as s3 from '@aws-cdk/aws-s3';
 import * as core from '@aws-cdk/core';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { DiagramOptions, CollapseTypes } from 'cdk-dia';
 import { NodejsEdgeFunction } from './nodejs-edge-function';
 
 export interface PrivateAssetBucketProps {
@@ -35,6 +37,7 @@ export interface CustomDomain {
   readonly domainName: string;
 }
 
+@DiagramOptions({ collapse: CollapseTypes.FORCE_NON_COLLAPSE })
 export class PrivateAssetBucket extends core.Construct {
 
   assetBucketName: string;
@@ -55,9 +58,9 @@ export class PrivateAssetBucket extends core.Construct {
 
     this.assetBucketName = assetBucket.bucketName;
 
-    const imageAccessFunction = new NodejsEdgeFunction(this, 'edge');
+    const assetAccessFunction = new NodejsEdgeFunction(this, 'edge');
 
-    imageAccessFunction.addToRolePolicy(new iam.PolicyStatement({
+    assetAccessFunction.addToRolePolicy(new iam.PolicyStatement({
       actions: [
         'logs:CreateLogGroup',
         'logs:CreateLogStream',
@@ -73,7 +76,7 @@ export class PrivateAssetBucket extends core.Construct {
       region: 'us-east-1',
     }) : undefined;
 
-    const imageCloudfront = new cloudfront.Distribution(this, 'imageCloudfront', {
+    const assetCloudfront = new cloudfront.Distribution(this, 'assetCloudfront', {
       certificate: assetBucketCert,
       domainNames: assetBucketDomainName ? [assetBucketDomainName] : undefined,
       defaultBehavior: {
@@ -90,18 +93,18 @@ export class PrivateAssetBucket extends core.Construct {
         }),
         edgeLambdas: [
           {
-            functionVersion: imageAccessFunction.currentVersion,
+            functionVersion: assetAccessFunction.currentVersion,
             eventType: cloudfront.LambdaEdgeEventType.ORIGIN_REQUEST,
           },
         ],
       },
     });
 
-    this.assetBucketCloudfrontUrl = imageCloudfront.distributionDomainName;
+    this.assetBucketCloudfrontUrl = assetCloudfront.distributionDomainName;
 
     const assetBucketRecord = props.customDomain ? new route53.ARecord(this, 'assetBucketRecord', {
       recordName: props.customDomain.domainName.split('.')[0],
-      target: route53.RecordTarget.fromAlias(new route53Targets.CloudFrontTarget(imageCloudfront)),
+      target: route53.RecordTarget.fromAlias(new route53Targets.CloudFrontTarget(assetCloudfront)),
       zone: props.customDomain.zone,
     }) : undefined;
 

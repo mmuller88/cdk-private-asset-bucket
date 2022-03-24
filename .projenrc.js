@@ -6,7 +6,7 @@ const exampleFile = fs
   .split('\n');
 const example = exampleFile.slice(17, exampleFile.length - 7);
 
-const cdkVersion = '1.147.0';
+const cdkVersion = '1.148.0';
 
 const cdkDependencies = [
   '@aws-cdk/aws-certificatemanager',
@@ -50,6 +50,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'aws-lambda',
     '@types/aws-lambda',
     `aws-cdk@${cdkVersion}`,
+    'cdk-dia',
     ...cdkDependencies,
   ],
   catalog: {
@@ -158,10 +159,11 @@ echo "curl --location --request GET \"https://$CFD/pic.png\" --cookie \"Cookie: 
 
 project.setScript('deploy', './node_modules/.bin/cdk deploy');
 project.setScript('destroy', './node_modules/.bin/cdk destroy');
-project.setScript('synth', './node_modules/.bin/cdk synth');
+project.setScript('synth', 'yarn cdk synth && yarn cdk-dia && mv diagram.png diagrams/all.png');
 
 const common_exclude = ['cdk.out'];
 project.npmignore.exclude(...common_exclude);
 project.gitignore.exclude(...common_exclude);
+project.gitignore.addPatterns('diagram.dot', 'diagram.png');
 
 project.synth();
