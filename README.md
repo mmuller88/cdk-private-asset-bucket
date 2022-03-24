@@ -9,7 +9,9 @@ A construct to create a private asset S3 bucket. Cognito will be used for token 
 
 ## Architecture
 
-![Diagram](misc/cdkPrivateAssetBucket.drawio.png)
+![Diagram](diagrams/all.png)
+
+Curious how I did the diagram? Have a look here https://martinmueller.dev/cdk-dia-eng .
 
 # Example
 
