@@ -1,13 +1,10 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as cloudfront from '@aws-cdk/aws-cloudfront';
-import * as lambda from '@aws-cdk/aws-lambda';
-import { BundlingOptions } from '@aws-cdk/aws-lambda-nodejs';
-import * as bundling from '@aws-cdk/aws-lambda-nodejs/lib/bundling';
-import { LockFile } from '@aws-cdk/aws-lambda-nodejs/lib/package-manager';
-import { callsites, findUpMultiple } from '@aws-cdk/aws-lambda-nodejs/lib/util';
-import * as core from '@aws-cdk/core';
-
+import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+import { BundlingOptions } from 'aws-cdk-lib/aws-lambda-nodejs';
+import { Construct } from 'constructs';
+import { Bundling } from './lib/bundling';
 
 /**
  * environment variables are not supported for Lambda@Edge
@@ -91,7 +88,7 @@ export interface NodejsEdgeFunctionProps extends Omit<lambda.FunctionOptions, 'e
 
 export class NodejsEdgeFunction extends cloudfront.experimental.EdgeFunction {
 
-  constructor(scope: core.Construct, id: string, props: NodejsEdgeFunctionProps = {}) {
+  constructor(scope: Construct, id: string, props: NodejsEdgeFunctionProps = {}) {
     const handler = props.handler ?? 'handler';
     const runtime = props.runtime ?? lambda.Runtime.NODEJS_14_X;
     const entry = path.resolve(findEntry(id, props.entry));
@@ -102,7 +99,7 @@ export class NodejsEdgeFunction extends cloudfront.experimental.EdgeFunction {
       ...props,
       runtime,
       stackId: props.stackId,
-      code: bundling.Bundling.bundle({
+      code: Bundling.bundle({
         ...props.bundling ?? {},
         architecture,
         runtime,
@@ -145,6 +142,12 @@ function findLockFile(depsLockFilePath?: string): string {
   }
 
   return lockFiles[0];
+}
+
+export enum LockFile {
+  NPM = 'package-lock.json',
+  YARN = 'yarn.lock',
+  PNPM = 'pnpm-lock.yaml',
 }
 
 /**
@@ -205,4 +208,61 @@ function findDefiningFile(): string {
   }
 
   return sites[definingIndex].getFileName();
+}
+
+
+/**
+ * Get callsites from the V8 stack trace API
+ *
+ * https://github.com/sindresorhus/callsites
+ */
+export function callsites(): CallSite[] {
+  const _prepareStackTrace = Error.prepareStackTrace;
+  Error.prepareStackTrace = (_, stack) => stack;
+  const stack = new Error().stack?.slice(1);
+  Error.prepareStackTrace = _prepareStackTrace;
+  return stack as unknown as CallSite[];
+}
+
+export interface CallSite {
+  getThis(): any;
+  getTypeName(): string;
+  getFunctionName(): string;
+  getMethodName(): string;
+  getFileName(): string;
+  getLineNumber(): number;
+  getColumnNumber(): number;
+  getFunction(): Function;
+  getEvalOrigin(): string;
+  isNative(): boolean;
+  isToplevel(): boolean;
+  isEval(): boolean;
+  isConstructor(): boolean;
+}
+
+/**
+ * Find the lowest of multiple files by walking up parent directories. If
+ * multiple files exist at the same level, they will all be returned.
+ */
+export function findUpMultiple(names: string[], directory: string = process.cwd()): string[] {
+  const absoluteDirectory = path.resolve(directory);
+
+  const files = [];
+  for (const name of names) {
+    const file = path.join(directory, name);
+    if (fs.existsSync(file)) {
+      files.push(file);
+    }
+  }
+
+  if (files.length > 0) {
+    return files;
+  }
+
+  const { root } = path.parse(absoluteDirectory);
+  if (absoluteDirectory === root) {
+    return [];
+  }
+
+  return findUpMultiple(names, path.dirname(absoluteDirectory));
 }

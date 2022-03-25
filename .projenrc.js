@@ -6,20 +6,7 @@ const exampleFile = fs
   .split('\n');
 const example = exampleFile.slice(17, exampleFile.length - 7);
 
-const cdkVersion = '1.149.0';
-
-const cdkDependencies = [
-  '@aws-cdk/aws-certificatemanager',
-  '@aws-cdk/aws-cloudfront',
-  '@aws-cdk/aws-cloudfront-origins',
-  '@aws-cdk/aws-cognito',
-  '@aws-cdk/aws-iam',
-  '@aws-cdk/aws-lambda',
-  '@aws-cdk/aws-lambda-nodejs',
-  '@aws-cdk/aws-route53',
-  '@aws-cdk/aws-route53-targets',
-  '@aws-cdk/aws-s3',
-];
+const cdkVersion = '2.17.0';
 
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Martin Mueller https://martinmueller.dev/resume',
@@ -36,7 +23,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
     allowedUsernames: ['aws-cdk-automation', 'github-bot'],
     secret: 'GITHUB_TOKEN',
   },
-  cdkDependencies,
   bundledDeps: [
     '@types/aws-lambda',
     // 'aws-jwt-verify',
@@ -51,7 +37,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@types/aws-lambda',
     `aws-cdk@${cdkVersion}`,
     'cdk-dia',
-    ...cdkDependencies,
   ],
   catalog: {
     twitter: 'MartinMueller_',

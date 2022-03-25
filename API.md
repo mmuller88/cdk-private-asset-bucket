@@ -14,7 +14,7 @@ new PrivateAssetBucket(scope: Construct, id: string, props: PrivateAssetBucketPr
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.Initializer.parameter.scope">scope</a></code> | <code>@aws-cdk/core.Construct</code> | *No description.* |
+| <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.Initializer.parameter.scope">scope</a></code> | <code>aws-cdk-lib/Construct</code> | *No description.* |
 | <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.Initializer.parameter.props">props</a></code> | <code><a href="#cdk-private-asset-bucket.PrivateAssetBucketProps">PrivateAssetBucketProps</a></code> | *No description.* |
 
@@ -22,7 +22,7 @@ new PrivateAssetBucket(scope: Construct, id: string, props: PrivateAssetBucketPr
 
 ##### `scope`<sup>Required</sup> <a name="scope" id="cdk-private-asset-bucket.PrivateAssetBucket.Initializer.parameter.scope"></a>
 
-- *Type:* @aws-cdk/core.Construct
+- *Type:* aws-cdk-lib/Construct
 
 ---
 
@@ -82,7 +82,7 @@ Return whether the given object is a Construct.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.property.node">node</a></code> | <code>@aws-cdk/core.ConstructNode</code> | The construct tree node associated with this construct. |
+| <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.property.node">node</a></code> | <code>aws-cdk-lib/ConstructNode</code> | The construct tree node associated with this construct. |
 | <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.property.assetBucketCloudfrontUrl">assetBucketCloudfrontUrl</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.property.assetBucketName">assetBucketName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.property.assetBucketRecordDomainName">assetBucketRecordDomainName</a></code> | <code>string</code> | *No description.* |
@@ -95,7 +95,7 @@ Return whether the given object is a Construct.
 public readonly node: ConstructNode;
 ```
 
-- *Type:* @aws-cdk/core.ConstructNode
+- *Type:* aws-cdk-lib/ConstructNode
 
 The construct tree node associated with this construct.
 
@@ -149,7 +149,7 @@ const customDomain: CustomDomain = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#cdk-private-asset-bucket.CustomDomain.property.domainName">domainName</a></code> | <code>string</code> | domainName needs to be part of the hosted zone e.g.: image.example.com. |
-| <code><a href="#cdk-private-asset-bucket.CustomDomain.property.zone">zone</a></code> | <code>@aws-cdk/aws-route53.IHostedZone</code> | *No description.* |
+| <code><a href="#cdk-private-asset-bucket.CustomDomain.property.zone">zone</a></code> | <code>aws-cdk-lib/aws-route53.IHostedZone</code> | *No description.* |
 
 ---
 
@@ -171,7 +171,7 @@ domainName needs to be part of the hosted zone e.g.: image.example.com.
 public readonly zone: IHostedZone;
 ```
 
-- *Type:* @aws-cdk/aws-route53.IHostedZone
+- *Type:* aws-cdk-lib/aws-route53.IHostedZone
 
 ---
 
