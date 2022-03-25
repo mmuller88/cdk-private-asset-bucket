@@ -5,7 +5,7 @@ interface PackageManagerProps {
   readonly lockFile: string;
   readonly installCommand: string[];
   readonly runCommand: string[];
-  readonly argsSeparator?: string
+  readonly argsSeparator?: string;
 }
 
 /**

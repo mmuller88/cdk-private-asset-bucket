@@ -1,7 +1,7 @@
 import * as os from 'os';
 import * as path from 'path';
-import { Architecture, AssetCode, Code, Runtime } from 'aws-cdk-lib/aws-lambda';
 import * as cdk from 'aws-cdk-lib';
+import { Architecture, AssetCode, Code, Runtime } from 'aws-cdk-lib/aws-lambda';
 import { EsbuildInstallation } from './esbuild-installation';
 import { PackageManager } from './package-manager';
 import { BundlingOptions, SourceMapMode } from './types';

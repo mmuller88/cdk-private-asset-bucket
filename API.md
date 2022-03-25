@@ -14,7 +14,7 @@ new PrivateAssetBucket(scope: Construct, id: string, props: PrivateAssetBucketPr
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.Initializer.parameter.scope">scope</a></code> | <code>aws-cdk-lib/Construct</code> | *No description.* |
+| <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
 | <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.Initializer.parameter.props">props</a></code> | <code><a href="#cdk-private-asset-bucket.PrivateAssetBucketProps">PrivateAssetBucketProps</a></code> | *No description.* |
 
@@ -22,7 +22,7 @@ new PrivateAssetBucket(scope: Construct, id: string, props: PrivateAssetBucketPr
 
 ##### `scope`<sup>Required</sup> <a name="scope" id="cdk-private-asset-bucket.PrivateAssetBucket.Initializer.parameter.scope"></a>
 
-- *Type:* aws-cdk-lib/Construct
+- *Type:* constructs.Construct
 
 ---
 
@@ -54,50 +54,14 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-#### Static Functions <a name="Static Functions" id="Static Functions"></a>
-
-| **Name** | **Description** |
-| --- | --- |
-| <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.isConstruct">isConstruct</a></code> | Return whether the given object is a Construct. |
-
----
-
-##### `isConstruct` <a name="isConstruct" id="cdk-private-asset-bucket.PrivateAssetBucket.isConstruct"></a>
-
-```typescript
-import { PrivateAssetBucket } from 'cdk-private-asset-bucket'
-
-PrivateAssetBucket.isConstruct(x: any)
-```
-
-Return whether the given object is a Construct.
-
-###### `x`<sup>Required</sup> <a name="x" id="cdk-private-asset-bucket.PrivateAssetBucket.isConstruct.parameter.x"></a>
-
-- *Type:* any
-
----
 
 #### Properties <a name="Properties" id="Properties"></a>
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.property.node">node</a></code> | <code>aws-cdk-lib/ConstructNode</code> | The construct tree node associated with this construct. |
 | <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.property.assetBucketCloudfrontUrl">assetBucketCloudfrontUrl</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.property.assetBucketName">assetBucketName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#cdk-private-asset-bucket.PrivateAssetBucket.property.assetBucketRecordDomainName">assetBucketRecordDomainName</a></code> | <code>string</code> | *No description.* |
-
----
-
-##### `node`<sup>Required</sup> <a name="node" id="cdk-private-asset-bucket.PrivateAssetBucket.property.node"></a>
-
-```typescript
-public readonly node: ConstructNode;
-```
-
-- *Type:* aws-cdk-lib/ConstructNode
-
-The construct tree node associated with this construct.
 
 ---
 
@@ -149,7 +113,7 @@ const customDomain: CustomDomain = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#cdk-private-asset-bucket.CustomDomain.property.domainName">domainName</a></code> | <code>string</code> | domainName needs to be part of the hosted zone e.g.: image.example.com. |
-| <code><a href="#cdk-private-asset-bucket.CustomDomain.property.zone">zone</a></code> | <code>aws-cdk-lib/aws-route53.IHostedZone</code> | *No description.* |
+| <code><a href="#cdk-private-asset-bucket.CustomDomain.property.zone">zone</a></code> | <code>aws-cdk-lib.aws_route53.IHostedZone</code> | *No description.* |
 
 ---
 
@@ -171,7 +135,7 @@ domainName needs to be part of the hosted zone e.g.: image.example.com.
 public readonly zone: IHostedZone;
 ```
 
-- *Type:* aws-cdk-lib/aws-route53.IHostedZone
+- *Type:* aws-cdk-lib.aws_route53.IHostedZone
 
 ---
 
@@ -260,7 +224,8 @@ public readonly tokenUse: string;
 
 The token use that you expect to be present in the JWT's token_use claim.
 
-Usually you are verifying either Access token (common) or ID token (less common). Pass null explicitly to not check the JWT's token use--if you know what you're doing
+Usually you are verifying either Access token (common) or ID token (less common).
+Pass null explicitly to not check the JWT's token use--if you know what you're doing
 
 ---
 
