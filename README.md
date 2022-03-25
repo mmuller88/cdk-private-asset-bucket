@@ -109,7 +109,7 @@ echo "curl --location --request GET "https://$CFD/pic.png" --cookie "Cookie: tok
 - Crespo Wang for his pioneer work regarding private S3 assets https://javascript.plainenglish.io/use-lambda-edge-jwt-to-secure-s3-bucket-dcca6eec4d7e
 - As always to the amazing CDK / Projen Community. Join us on [Slack](https://cdk-dev.slack.com)!
 - [Projen](https://github.com/projen/projen) project and the community around it
-- To you for checking this out. Check me out and perhaps give me feedback https://martinmueller.dev
+- To you for checking this out. Check me out and perhaps give me feedback https://martinmueller.dev .
 
 I love to work on Content Management Open Source projects. A lot from my stuff you can already use on https://github.com/mmuller88 . If you like my work there and my blog posts, please consider supporting me on Patreon:
 
