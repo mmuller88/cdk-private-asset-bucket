@@ -6,7 +6,7 @@ const exampleFile = fs
   .split('\n');
 const example = exampleFile.slice(17, exampleFile.length - 7);
 
-const cdkVersion = '2.19.0';
+const cdkVersion = '2.20.0';
 
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Martin Mueller https://martinmueller.dev/resume',
