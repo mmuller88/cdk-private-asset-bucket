@@ -25,7 +25,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   },
   bundledDeps: [
     '@types/aws-lambda',
-    // 'aws-jwt-verify',
     'aws-lambda',
   ],
   peerDeps: [
