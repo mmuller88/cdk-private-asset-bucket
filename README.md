@@ -115,7 +115,7 @@ git tag -a v2.16.0 -m "prepare tag version" && git push --tags
 - [Projen](https://github.com/projen/projen) project and the community around it.
 - To you for checking this out. Check me out and perhaps give me feedback https://martinmueller.dev .
 
-I love to work on Content Management Open Source projects. A lot from my stuff you can already use on https://github.com/mmuller88 . If you like my work there and my blog posts, please consider supporting me on Patreon:
+I love to work on Content Management Open Source projects. A lot from my stuff you can already use on https://github.com/mmuller88. If you like my work there and my blog posts, please consider supporting me on Patreon:
 
 <a href='https://patreon.com/bePatron?u=29010217' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://raw.githubusercontent.com/mmuller88/mmuller88/main/patreon.png' border='0' alt='Become a Patreon!' /></a>
 
